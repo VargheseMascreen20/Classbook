@@ -3,31 +3,43 @@ package com.var.classbook.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
-
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
-
+import com.var.classbook.R;
 
 public class SplashActivity extends AppCompatActivity {
 
+    // Create a new event for the activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Set the layout for the content view.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_splash);
+        Thread thread = new Thread() {
+            public void run() {
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        if (SaveSharedPreference.getCheckedItem(Splash.this) == 0)
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-//        else if (SaveSharedPreference.getCheckedItem(Splash.this) == 1)
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-//        else if (SaveSharedPreference.getCheckedItem(Splash.this) == 2)
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                try {
+                    sleep(2000);
+//                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(SplashActivity.this, "2", Toast.LENGTH_SHORT).show();
+                } finally {
 
-        Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-        startActivity(i);
-        finish();
+                    Intent check = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(check);
+                    finish();
+                }
+            }
+        };
+        thread.start();
     }
+
+
 }
+
+
+
